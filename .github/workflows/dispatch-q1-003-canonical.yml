@@ -1,0 +1,35 @@
+name: Dispatch canonical q1-003 companion build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.bootstrap/q1-003/DISPATCH'
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify frozen inputs before dispatch
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(stat -c '%s' FC-GATEWAY-campaign-q1-003-lab.zip)" = "130460"
+          echo "f0b46ab0d3f81e87fe7c82fc4a6f23ceb8057c59940cd7a67adb8f696b98c488  FC-GATEWAY-campaign-q1-003-lab.zip" | sha256sum -c -
+          echo "31c4c6275de8dfe147ac08d30e5d6d699403d3be28c7d307411ddb16bf2df9c2  FC_GATEWAY_Q1_003_OFFLINE_COMPANION_BUILDER_v2.zip" | sha256sum -c -
+
+      - name: Dispatch canonical workflow only after exact verification
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh workflow run build-q1-003-offline-toolchain.yml --ref main

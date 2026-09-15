@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - '.bootstrap/q1-003/**'
+      - '.bootstrap/q1-003/READY'
 
 permissions:
   contents: write
@@ -25,6 +25,7 @@ jobs:
         run: |
           set -euo pipefail
           test -d .bootstrap/q1-003
+          test -f .bootstrap/q1-003/READY
           cat .bootstrap/q1-003/*.b64 | tr -d '\r\n ' | base64 --decode > FC-GATEWAY-campaign-q1-003-lab.zip
           test "$(stat -c '%s' FC-GATEWAY-campaign-q1-003-lab.zip)" = "130460"
           echo "f0b46ab0d3f81e87fe7c82fc4a6f23ceb8057c59940cd7a67adb8f696b98c488  FC-GATEWAY-campaign-q1-003-lab.zip" | sha256sum -c -

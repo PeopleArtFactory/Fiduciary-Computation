@@ -1,0 +1,72 @@
+name: Build q1-003 offline toolchain companion
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify frozen inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "f0b46ab0d3f81e87fe7c82fc4a6f23ceb8057c59940cd7a67adb8f696b98c488  FC-GATEWAY-campaign-q1-003-lab.zip" | sha256sum -c -
+          echo "31c4c6275de8dfe147ac08d30e5d6d699403d3be28c7d307411ddb16bf2df9c2  FC_GATEWAY_Q1_003_OFFLINE_COMPANION_BUILDER_v2.zip" | sha256sum -c -
+
+      - name: Set up Node 22.16.0
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.16.0'
+
+      - name: Extract external builder
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf builder
+          mkdir builder
+          unzip -q FC_GATEWAY_Q1_003_OFFLINE_COMPANION_BUILDER_v2.zip -d builder
+          test -f builder/q1_003_offline_companion_builder_v2/build-online.sh
+
+      - name: Build exact offline companion
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash builder/q1_003_offline_companion_builder_v2/build-online.sh \
+            "$GITHUB_WORKSPACE/FC-GATEWAY-campaign-q1-003-lab.zip" \
+            "$RUNNER_TEMP/FC-GATEWAY-q1-003-offline-toolchain"
+          cp "$RUNNER_TEMP/FC-GATEWAY-q1-003-offline-toolchain.tar.gz" .
+          cp "$RUNNER_TEMP/FC-GATEWAY-q1-003-offline-toolchain.tar.gz.sha256" .
+          sha256sum -c FC-GATEWAY-q1-003-offline-toolchain.tar.gz.sha256
+
+      - name: Emit provenance summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo "# q1-003 offline companion build"
+            echo
+            echo "- runner: ubuntu-24.04"
+            echo "- node: $(node --version)"
+            echo "- lab zip: $(sha256sum FC-GATEWAY-campaign-q1-003-lab.zip | awk '{print $1}')"
+            echo "- builder v2: $(sha256sum FC_GATEWAY_Q1_003_OFFLINE_COMPANION_BUILDER_v2.zip | awk '{print $1}')"
+            echo "- companion: $(sha256sum FC-GATEWAY-q1-003-offline-toolchain.tar.gz | awk '{print $1}')"
+          } | tee GITHUB_BUILD_PROVENANCE.md
+
+      - name: Upload exact companion artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: FC-GATEWAY-q1-003-offline-toolchain
+          path: |
+            FC-GATEWAY-q1-003-offline-toolchain.tar.gz
+            FC-GATEWAY-q1-003-offline-toolchain.tar.gz.sha256
+            GITHUB_BUILD_PROVENANCE.md
+          if-no-files-found: error
+          retention-days: 30

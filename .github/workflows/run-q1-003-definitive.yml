@@ -45,7 +45,7 @@ jobs:
         run: |
           set -euo pipefail
           echo "4f64b24a29bf10b285f039b3b47c6da47303650cebe3b9fcb7136415d20ff99a  companion-artifact/FC-GATEWAY-q1-003-offline-toolchain.tar.gz" | sha256sum -c -
-          sha256sum -c companion-artifact/FC-GATEWAY-q1-003-offline-toolchain.tar.gz.sha256
+          (cd companion-artifact && sha256sum -c FC-GATEWAY-q1-003-offline-toolchain.tar.gz.sha256)
 
       - name: Reproduce offline bootstrap and pilot with audited runner v3
         shell: bash

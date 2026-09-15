@@ -1,0 +1,53 @@
+name: Install exact q1-003 lab artifact
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.bootstrap/q1-003/**'
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  install:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reconstruct and verify frozen lab ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -d .bootstrap/q1-003
+          cat .bootstrap/q1-003/*.b64 | tr -d '\r\n ' | base64 --decode > FC-GATEWAY-campaign-q1-003-lab.zip
+          test "$(stat -c '%s' FC-GATEWAY-campaign-q1-003-lab.zip)" = "130460"
+          echo "f0b46ab0d3f81e87fe7c82fc4a6f23ceb8057c59940cd7a67adb8f696b98c488  FC-GATEWAY-campaign-q1-003-lab.zip" | sha256sum -c -
+          echo "31c4c6275de8dfe147ac08d30e5d6d699403d3be28c7d307411ddb16bf2df9c2  FC_GATEWAY_Q1_003_OFFLINE_COMPANION_BUILDER_v2.zip" | sha256sum -c -
+
+      - name: Commit exact binary artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add FC-GATEWAY-campaign-q1-003-lab.zip
+          if git diff --cached --quiet; then
+            echo "Exact lab artifact already committed."
+          else
+            git commit -m "Install exact frozen q1-003 lab artifact [skip ci]"
+            git push origin HEAD:main
+          fi
+
+      - name: Dispatch canonical companion build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh workflow run build-q1-003-offline-toolchain.yml --ref main

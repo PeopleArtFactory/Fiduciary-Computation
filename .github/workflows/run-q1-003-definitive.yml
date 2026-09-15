@@ -1,0 +1,193 @@
+name: Run definitive q1-003 campaign
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.bootstrap/q1-003/RUN_FULL'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  definitive:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - name: Checkout reproduction repository
+        uses: actions/checkout@v4
+
+      - name: Verify frozen transport inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "f0b46ab0d3f81e87fe7c82fc4a6f23ceb8057c59940cd7a67adb8f696b98c488  FC-GATEWAY-campaign-q1-003-lab.zip" | sha256sum -c -
+          echo "31c4c6275de8dfe147ac08d30e5d6d699403d3be28c7d307411ddb16bf2df9c2  FC_GATEWAY_Q1_003_OFFLINE_COMPANION_BUILDER_v2.zip" | sha256sum -c -
+          echo "7323137e813804218898d40b7a7b747e1c79ffd7e9e3235cd829c43c2efda7e7  FC_GATEWAY_Q1_003_OFFLINE_RUNNER_v3.zip" | sha256sum -c -
+
+      - name: Set up Node 22.16.0
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.16.0'
+
+      - name: Download canonical offline companion from successful build
+        uses: actions/download-artifact@v4
+        with:
+          name: FC-GATEWAY-q1-003-offline-toolchain
+          path: companion-artifact
+          github-token: ${{ github.token }}
+          run-id: 34967549472
+
+      - name: Verify canonical companion identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "4f64b24a29bf10b285f039b3b47c6da47303650cebe3b9fcb7136415d20ff99a  companion-artifact/FC-GATEWAY-q1-003-offline-toolchain.tar.gz" | sha256sum -c -
+          sha256sum -c companion-artifact/FC-GATEWAY-q1-003-offline-toolchain.tar.gz.sha256
+
+      - name: Reproduce offline bootstrap and pilot with audited runner v3
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf runner-v3
+          mkdir runner-v3
+          unzip -q FC_GATEWAY_Q1_003_OFFLINE_RUNNER_v3.zip -d runner-v3
+          RUNNER="runner-v3/q1_003_offline_companion_runner_v3/seed-and-run-offline.sh"
+          test -f "$RUNNER"
+          bash "$RUNNER" \
+            "$GITHUB_WORKSPACE/FC-GATEWAY-campaign-q1-003-lab.zip" \
+            "$GITHUB_WORKSPACE/companion-artifact/FC-GATEWAY-q1-003-offline-toolchain.tar.gz" \
+            "$RUNNER_TEMP/q1-003"
+
+      - name: Gate definitive run on exact pilot identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          LABROOT="$(find "$RUNNER_TEMP/q1-003/lab" -mindepth 1 -maxdepth 1 -type d | head -1)"
+          test -n "$LABROOT"
+          python3 - "$LABROOT/benchmarks/q1-performance/results/pilot-lab/summary.json" <<'PY'
+          import json, sys
+          p = sys.argv[1]
+          s = json.load(open(p, "r", encoding="utf-8"))
+          assert s["status"] == "VALID_MEASUREMENT", s["status"]
+          assert s.get("invalidReasons") == [], s.get("invalidReasons")
+          env = s["environment"]
+          prov = s["provenance"]
+          assert prov["specHash"] == "9d7435f81f687a311537f2488727f43ae10746b1500cc71af3c29571814a7efe"
+          assert prov["generatorHash"] == "c737483d4ecf3e466ec95dc941727b5fd9c5795cea8ca3253b39858f50cfa2f9"
+          assert env["pack"]["packHash"] == "ee0111781bc4e22404fd1ee961698068bdef58700b9919211c1e0e08b481df44"
+          assert env["source"]["dirty"] is False
+          assert env["node"] == "v22.16.0"
+          assert env["pnpm"] == "10.0.0"
+          assert env["typescript"] == "5.9.3"
+          assert env["typesNode"] == "25.9.6"
+          assert env["undiciTypes"] == "7.24.6"
+          print("PILOT_GATE=PASS")
+          PY
+
+      - name: Run frozen definitive N=1000 campaign
+        shell: bash
+        run: |
+          set -euo pipefail
+          LABROOT="$(find "$RUNNER_TEMP/q1-003/lab" -mindepth 1 -maxdepth 1 -type d | head -1)"
+          export COREPACK_HOME="$RUNNER_TEMP/q1-003/corepack-home"
+          export PATH="$RUNNER_TEMP/q1-003/bin:$PATH"
+          export npm_config_offline=true
+          export npm_config_prefer_offline=true
+          cd "$LABROOT"
+          test "$(node --version)" = "v22.16.0"
+          test "$(pnpm --version)" = "10.0.0"
+          test -z "$(git status --porcelain -- src tests package.json tsconfig.json benchmarks/q1-performance)"
+          bash ./lab/02-campaign-q1-003.sh
+          bash ./lab/03-pack-results.sh
+
+      - name: Validate definitive result envelope
+        shell: bash
+        run: |
+          set -euo pipefail
+          LABROOT="$(find "$RUNNER_TEMP/q1-003/lab" -mindepth 1 -maxdepth 1 -type d | head -1)"
+          SUMMARY="$LABROOT/benchmarks/q1-performance/results/campaign-q1-003/summary.json"
+          test -f "$SUMMARY"
+          python3 - "$SUMMARY" <<'PY'
+          import hashlib, json, os, sys
+          p = sys.argv[1]
+          s = json.load(open(p, "r", encoding="utf-8"))
+          assert s["status"] == "VALID_MEASUREMENT", s["status"]
+          assert s.get("invalidReasons") == [], s.get("invalidReasons")
+          env = s["environment"]
+          prov = s["provenance"]
+          params = s["parameters"]
+          assert prov["specHash"] == "9d7435f81f687a311537f2488727f43ae10746b1500cc71af3c29571814a7efe"
+          assert prov["generatorHash"] == "c737483d4ecf3e466ec95dc941727b5fd9c5795cea8ca3253b39858f50cfa2f9"
+          assert env["pack"]["packHash"] == "ee0111781bc4e22404fd1ee961698068bdef58700b9919211c1e0e08b481df44"
+          assert env["source"]["dirty"] is False
+          assert env["node"] == "v22.16.0"
+          assert env["pnpm"] == "10.0.0"
+          assert env["typescript"] == "5.9.3"
+          assert env["typesNode"] == "25.9.6"
+          assert env["undiciTypes"] == "7.24.6"
+          assert params["samples"] == 1000
+          assert params["warmupCore"] == 200
+          assert params["warmupB5"] == 20
+          assert params["warmupB6"] == 5
+          assert params["lineageSizes"] == [10, 100, 1000, 10000]
+          result_dir = os.path.dirname(p)
+          raw = prov["rawFileSha256"]
+          required = {
+              "B0-direct.raw.json",
+              "B1-admission.raw.json",
+              "B2-capability.raw.json",
+              "B3-prepared.raw.json",
+              "B4-end-to-end.raw.json",
+              "B5-verification-N10.raw.json",
+              "B5-verification-N100.raw.json",
+              "B5-verification-N1000.raw.json",
+              "B5-verification-N10000.raw.json",
+              "B6-recovery.raw.json",
+          }
+          assert required.issubset(raw.keys()), sorted(set(required) - set(raw.keys()))
+          for name, expected in raw.items():
+              fp = os.path.join(result_dir, name)
+              assert os.path.isfile(fp), fp
+              actual = hashlib.sha256(open(fp, "rb").read()).hexdigest()
+              assert actual == expected, (name, actual, expected)
+          print("DEFINITIVE_GATE=PASS")
+          print("H_benchmark=" + s["benchmarkHash"])
+          PY
+
+      - name: Emit outer reproduction provenance
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          LABROOT="$(find "$RUNNER_TEMP/q1-003/lab" -mindepth 1 -maxdepth 1 -type d | head -1 || true)"
+          {
+            echo "# q1-003 definitive GitHub reproduction"
+            echo
+            echo "- workflow_run_id: $GITHUB_RUN_ID"
+            echo "- repository_commit: $GITHUB_SHA"
+            echo "- runner: ubuntu-24.04"
+            echo "- node: $(node --version)"
+            echo "- lab_zip_sha256: $(sha256sum FC-GATEWAY-campaign-q1-003-lab.zip | awk '{print $1}')"
+            echo "- runner_v3_sha256: $(sha256sum FC_GATEWAY_Q1_003_OFFLINE_RUNNER_v3.zip | awk '{print $1}')"
+            echo "- companion_sha256: $(sha256sum companion-artifact/FC-GATEWAY-q1-003-offline-toolchain.tar.gz | awk '{print $1}')"
+            if [ -n "$LABROOT" ] && [ -f "$LABROOT/benchmarks/q1-performance/results/campaign-q1-003/summary.json" ]; then
+              echo "- benchmark_hash: $(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))[\"benchmarkHash\"])' "$LABROOT/benchmarks/q1-performance/results/campaign-q1-003/summary.json")"
+            fi
+          } | tee FULL_RUN_PROVENANCE.md
+
+      - name: Upload definitive q1-003 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: FC-GATEWAY-q1-003-definitive-evidence
+          path: |
+            ${{ runner.temp }}/q1-003/lab/*/benchmarks/q1-performance/results/campaign-q1-003
+            ${{ runner.temp }}/q1-003/lab/*/benchmarks/q1-performance/results/pilot-lab/summary.json
+            ${{ runner.temp }}/q1-003/lab/*/lab-out
+            FULL_RUN_PROVENANCE.md
+            companion-artifact/GITHUB_BUILD_PROVENANCE.md
+          if-no-files-found: warn
+          retention-days: 30

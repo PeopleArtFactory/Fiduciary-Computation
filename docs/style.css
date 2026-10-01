@@ -1,0 +1,12 @@
+:root{--navy:#082d4d;--ink:#153047;--blue:#0f5f91;--gold:#b88627;--paper:#f7f7f2;--line:#cfdae2;--soft:#edf4f8;--white:#fff}
+*{box-sizing:border-box}html{background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
+body{margin:0}main{max-width:1180px;margin:auto;padding:48px 24px 64px}.hero{border-top:8px solid var(--navy);padding:42px 0 34px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:.78rem;font-weight:800;letter-spacing:.12em;color:var(--gold)}h1{font-family:Georgia,serif;color:var(--navy);font-size:clamp(3rem,8vw,6.4rem);line-height:.95;margin:.22em 0 .12em;letter-spacing:-.035em}
+.subtitle{font-family:Georgia,serif;font-size:clamp(1.35rem,3vw,2.1rem);color:var(--blue);margin:0 0 1.1rem}.lead{font-size:1.18rem;max-width:850px;margin:0}
+.panel{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:28px;margin-top:24px;box-shadow:0 8px 28px rgba(8,45,77,.05)}
+h2,h3{color:var(--navy)}h2{font-family:Georgia,serif;font-size:1.7rem;margin-top:0}h3{margin:.15rem 0 .7rem;font-size:1.08rem}.chain{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin:24px 0}
+.chain span{padding:9px 12px;background:var(--soft);border:1px solid #c5dce9;border-radius:8px;font-weight:700}.chain b{color:var(--gold);font-size:1.25rem}.note{border-left:4px solid var(--gold);padding-left:16px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}.card{background:var(--white);border:1px solid var(--line);border-top:4px solid var(--blue);border-radius:12px;padding:20px}.card p{margin:0;font-size:.96rem}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:36px}.provenance code{overflow-wrap:anywhere;background:var(--soft);padding:.12rem .35rem;border-radius:5px}
+footer{margin-top:34px;border-top:1px solid var(--line);padding-top:22px;font-size:.9rem;color:#536979}footer span{font-size:.82rem}
+@media(max-width:820px){main{padding:28px 16px 48px}.grid{grid-template-columns:1fr}.split{grid-template-columns:1fr}.hero{padding-top:30px}.chain{align-items:stretch}.chain span{width:100%}.chain b{text-align:center}}

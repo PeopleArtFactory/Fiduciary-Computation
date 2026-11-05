@@ -1,0 +1,13 @@
+{
+  "schema": "vicensae.editorial.manifest/0.1",
+  "title": "VICENSAE / MANIFEST",
+  "version": "0.1-alpha",
+  "date": "2026-11-05",
+  "alpha_url": "https://peopleartfactory.github.io/Fiduciary-Computation/MANIFEST/",
+  "canonical_destination": "https://vicensae.com/MANIFEST",
+  "publication_status": "alpha_github_pages",
+  "claims_status": "philosophical_and_experimental_proposal",
+  "manifesto_markdown_sha256": "c59e8650691486836ee01bb8a2f620cb8ebed36b99b1a700739b5df4b6060fa0",
+  "signature_status": "not_signed",
+  "dfd_status": "not_issued"
+}

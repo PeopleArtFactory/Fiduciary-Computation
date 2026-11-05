@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071319">
+  <meta name="description" content="VICENSÆ / MANIFEST. La libertad es una consecuencia en sí misma. Computación Fiduciaria, evidencia, continuidad, recursos, reservas y libertad.">
+  <meta name="author" content="VICENSÆ · Raúl Ballester Nortes">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="VICENSÆ / MANIFEST — La libertad es una consecuencia en sí misma">
+  <meta property="og:description" content="Manifiesto fundacional: libertad, evidencia, custodia, continuidad y falsabilidad.">
+  <meta property="og:url" content="https://peopleartfactory.github.io/Fiduciary-Computation/MANIFEST/">
+  <link rel="canonical" href="https://peopleartfactory.github.io/Fiduciary-Computation/MANIFEST/">
+  <title>MANIFEST — VICENSÆ · Fiduciary Computation</title>
+  <style>
+    :root {color-scheme:dark;--bg:#071319;--ink:#f3eee4;--muted:#adbac0;--gold:#d2aa6a;--line:rgba(236,235,220,.14);--teal:#a2e7d6;--surface:#0d2027;--radius:24px;--reading:900px}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:100px}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.6;min-width:320px;overflow-x:hidden}
+    body::before{content:"";position:fixed;z-index:-1;inset:0;pointer-events:none;background:radial-gradient(ellipse 65% 48% at 84% 3%,rgba(25,104,92,.2),transparent),radial-gradient(ellipse 58% 35% at 4% 27%,rgba(165,108,42,.11),transparent)}
+    ::selection{background:#c69c55;color:#081316}
+    a{color:inherit}
+    button{font:inherit}
+    .skip{position:absolute;left:16px;top:-60px;padding:12px;background:#fff;color:#000;z-index:100}.skip:focus{top:16px}
+    .progress{height:3px;position:fixed;top:0;left:0;right:0;z-index:120;background:transparent}.progress>span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--teal))}
+    .site-header{position:sticky;top:0;z-index:90;background:rgba(7,19,25,.87);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+    .bar{max-width:1480px;min-height:70px;padding:12px clamp(20px,4.6vw,70px);margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;text-decoration:none;white-space:nowrap;gap:11px;font-size:1rem;font-weight:750;letter-spacing:.16em}
+    .brand-mark{width:37px;height:37px;border:1px solid rgba(210,170,106,.5);display:grid;place-items:center;border-radius:50%;color:var(--gold);font-size:29px;line-height:1}
+    .brand em{font-style:normal;font-weight:450;color:var(--muted);letter-spacing:.09em}
+    .header-right{display:flex;align-items:center;gap:24px}.header-right a{font-size:.72rem;letter-spacing:.12em;text-decoration:none;color:#d8d9d1;text-transform:uppercase}.header-right a:hover{color:var(--teal)}
+    .action{display:inline-flex;align-items:center;justify-content:center;gap:12px;border:1px solid rgba(210,170,106,.53);border-radius:100px;background:transparent;color:var(--ink);padding:11px 19px;cursor:pointer;text-decoration:none;font-size:.77rem;letter-spacing:.11em;text-transform:uppercase;transition:background .2s,color .2s}
+    .action:hover,.action:focus-visible{background:var(--gold);color:#071319;outline:none}
+    .action-primary{background:var(--gold);color:#0b1c1f;border-color:var(--gold);font-weight:750}
+    .action-primary:hover{background:#e8c995}
+    .hero{position:relative;overflow:hidden;max-width:1480px;min-height:710px;margin:0 auto;padding:clamp(65px,9vw,145px) clamp(20px,6vw,90px) 75px;display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.75fr);align-items:center;gap:20px}
+    .hero:after{content:"";position:absolute;left:6%;right:6%;bottom:0;border-bottom:1px solid var(--line)}
+    .eyebrow{color:var(--gold);font-size:.72rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase}
+    .hero h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(4.1rem,9.1vw,9.5rem);font-weight:400;line-height:.91;letter-spacing:-.065em;margin:24px 0 32px}
+    .hero h1 span{display:block;font-style:italic;color:var(--gold);font-size:clamp(3.2rem,7.4vw,7.7rem)}
+    .hero-lead{max-width:700px;font-size:clamp(1.2rem,1.8vw,1.65rem);line-height:1.5;color:#e2e6df;margin:0}
+    .hero-lead strong{font-weight:650;color:var(--teal)}
+    .hero-small{max-width:640px;color:var(--muted);font-size:1rem;margin:22px 0 35px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+    .orb{max-width:550px;justify-self:center;width:100%;aspect-ratio:1;position:relative;filter:drop-shadow(0 0 90px rgba(153,157,97,.08))}
+    .orb svg{width:100%;height:100%;overflow:visible}
+    .orb .rotate{animation:orbit 60s linear infinite;transform-origin:250px 250px}.orb .counter{animation:orbit 78s linear infinite reverse;transform-origin:250px 250px}
+    @keyframes orbit{to{transform:rotate(360deg)}}
+    .orb-label{position:absolute;bottom:5%;width:100%;text-align:center;text-transform:uppercase;color:var(--muted);font-size:.7rem;letter-spacing:.2em}
+    .truth-strip{margin:40px auto 0;max-width:1480px;padding:0 clamp(20px,6vw,90px);display:grid;grid-template-columns:repeat(4,1fr);gap:1px}
+    .truth-strip>div{border-left:1px solid var(--line);padding:18px 21px 22px;background:rgba(255,255,255,.018)}
+    .truth-strip small{display:block;font-size:.66rem;letter-spacing:.18em;color:var(--gold);margin-bottom:9px}
+    .truth-strip strong{display:block;font-weight:500;font-size:1rem}
+    .banner{max-width:1240px;margin:90px auto 90px;padding:50px clamp(20px,4vw,68px);border-top:1px solid rgba(211,170,106,.38);border-bottom:1px solid rgba(211,170,106,.38);text-align:center;position:relative}
+    .banner p{font-family:Georgia,'Times New Roman',serif;font-size:clamp(1.8rem,3.2vw,3.2rem);line-height:1.28;letter-spacing:-.025em;margin:0}
+    .banner p em{color:var(--gold);font-style:normal}
+    .banner small{display:block;margin-top:24px;font-size:.72rem;letter-spacing:.2em;color:var(--muted)}
+    .architecture{max-width:1480px;margin:auto;padding:0 clamp(20px,6vw,90px) 115px}
+    .section-head{display:flex;align-items:baseline;gap:24px;border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:32px}
+    .section-head .n{font-size:.72rem;letter-spacing:.2em;color:var(--gold)}
+    .section-head h2{font-family:Georgia,serif;font-size:clamp(2rem,4vw,4rem);font-weight:400;letter-spacing:-.045em;line-height:1.05;margin:0}
+    .architecture-intro{color:var(--muted);font-size:1.05rem;max-width:650px;margin-bottom:32px}
+    .flow{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+    .flow-node{border:1px solid var(--line);background:linear-gradient(155deg,rgba(44,91,89,.25),rgba(255,255,255,.012));padding:24px 14px;min-height:140px;border-radius:16px;display:flex;flex-direction:column;justify-content:space-between;gap:20px}
+    .flow-node b{color:var(--gold);font-size:.72rem;letter-spacing:.16em}.flow-node strong{font-size:.92rem;font-weight:650}.flow-node small{font-size:.72rem;color:var(--muted);line-height:1.4}
+    .flow-note{color:var(--muted);font-size:.83rem;margin:22px 0 0}
+    .content-grid{max-width:1480px;padding:0 clamp(20px,6vw,90px);margin:0 auto 110px;display:grid;grid-template-columns:230px minmax(0,1fr);gap:clamp(30px,5.5vw,100px)}
+    aside{position:relative}aside .sticky{position:sticky;top:105px;display:grid;gap:0}aside .side-title{font-size:.7rem;letter-spacing:.2em;color:var(--gold);padding-bottom:18px}aside a{display:flex;gap:14px;padding:8px 9px 8px 0;border-left:2px solid transparent;text-decoration:none;color:#a7b7b9;font-size:.85rem;line-height:1.3}aside a:hover,aside a.current{color:#fff;border-left-color:var(--gold);padding-left:12px}aside .nav-index{font-size:.68rem;color:var(--gold);min-width:25px}
+    .manuscript{max-width:var(--reading);min-width:0}.manuscript h2{font-family:Georgia,serif;font-size:clamp(1.85rem,2.9vw,3.1rem);font-weight:400;letter-spacing:-.035em;line-height:1.13;margin:90px 0 24px;color:#fff;scroll-margin-top:120px}
+    .manuscript h2:first-of-type{margin-top:35px}.manuscript p{font-size:1.03rem;line-height:1.9;color:#d8ddda;margin:0 0 19px}.manuscript strong{color:#fff;font-weight:670}.manuscript blockquote{border-left:2px solid var(--gold);margin:25px 0 40px;padding:0 0 0 25px}.manuscript blockquote p{font-family:Georgia,serif;font-size:clamp(1.6rem,2.4vw,2.5rem);color:var(--gold);line-height:1.28}
+    .manuscript h2:before{content:"";display:block;width:38px;border-top:2px solid var(--gold);margin-bottom:26px}.manuscript h2 ~ h2{border-top:1px solid var(--line);padding-top:48px}
+    .manuscript>p:first-child,.manuscript>p:nth-child(2){font-size:.8rem;letter-spacing:.03em;color:var(--muted)}.manuscript hr{border:0;border-top:1px solid var(--line);margin-top:70px}
+    .status{margin:0 auto 100px;max-width:1300px;border:1px solid rgba(210,170,106,.3);border-radius:25px;padding:40px clamp(20px,4vw,60px);background:linear-gradient(115deg,rgba(210,170,106,.07),rgba(88,143,130,.05))}
+    .status h2{font-family:Georgia,serif;font-size:clamp(1.9rem,3vw,2.9rem);font-weight:400;margin:0 0 14px}.status p{max-width:850px;color:#c9d4d1}.chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:25px}.chip{border:1px solid var(--line);color:var(--muted);font-size:.72rem;padding:8px 13px;border-radius:30px;letter-spacing:.06em}
+    .footer{border-top:1px solid var(--line);padding:50px clamp(20px,6vw,90px) 70px}.footer-inner{max-width:1300px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:40px}.footer strong{font-family:Georgia,serif;font-size:2rem;font-weight:400}.footer p{font-size:.85rem;color:var(--muted);margin:10px 0}.footer-links{display:flex;gap:20px;flex-wrap:wrap;align-content:start;justify-content:flex-end;font-size:.82rem}.footer-links a{color:var(--teal);text-underline-offset:4px}.copyright{margin-top:60px;font-size:.75rem;color:#869799;border-top:1px solid var(--line);padding-top:20px;letter-spacing:.06em}
+    .toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,30px);padding:13px 20px;color:#071319;background:var(--teal);border-radius:50px;z-index:100;box-shadow:0 14px 35px #0005;opacity:0;pointer-events:none;transition:.25s;font-size:.85rem}.toast.show{transform:translate(-50%,0);opacity:1}
+    .reading-mode{--bg:#eee9de;--ink:#17282a;--muted:#566966;--line:rgba(40,62,60,.17);--surface:#e9e2d5;color:var(--ink)}
+    .reading-mode::before{display:none}.reading-mode .site-header{background:rgba(238,233,222,.93)}.reading-mode .header-right a,.reading-mode .hero-lead,.reading-mode .manuscript strong,.reading-mode .manuscript h2,.reading-mode .manuscript p,.reading-mode .banner p,.reading-mode .status h2{color:#17282a}.reading-mode .flow-node{background:#e8e3d9}.reading-mode .brand{color:#17282a}.reading-mode .action{color:#17282a}.reading-mode .action-primary{color:#071319}.reading-mode .manuscript blockquote p{color:#7a4d1c}.reading-mode aside a{color:#536765}.reading-mode aside a.current{color:#122825}.reading-mode .hero h1{color:#17282a}
+    @media(max-width:1070px){.header-right .nav-link{display:none}.hero{grid-template-columns:1fr;min-height:0;padding-top:100px}.orb{position:absolute;right:-120px;top:8px;width:440px;opacity:.28;z-index:-1}.truth-strip{grid-template-columns:repeat(2,1fr)}.content-grid{grid-template-columns:1fr}aside{display:none}.flow{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:600px){.orb-label{display:none}.hero{padding-top:75px}.hero h1{font-size:clamp(3.75rem,17vw,5.4rem)}.hero h1 span{font-size:clamp(3rem,12vw,4.6rem)}.orb{right:-180px;top:20px;width:430px}.truth-strip{grid-template-columns:1fr 1fr;margin-top:10px}.truth-strip>div{padding:16px 11px}.truth-strip strong{font-size:.88rem}.banner{margin:65px 20px}.flow{grid-template-columns:repeat(2,1fr)}.flow-node{min-height:130px}.footer-inner{grid-template-columns:1fr}.footer-links{justify-content:start}.header-right .action{padding:9px 12px;font-size:.65rem}.brand em{display:none}.manuscript h2{margin-top:65px}.status{margin:0 20px 80px}.hero-actions .action{font-size:.68rem}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+<a class="skip" href="#manifesto">Ir al manifiesto</a>
+<div class="progress" aria-hidden="true"><span id="reading-progress"></span></div>
+<header class="site-header"><div class="bar">
+  <a class="brand" href="#inicio" aria-label="VICENSÆ inicio"><span class="brand-mark" aria-hidden="true">∞</span><span>VICENSÆ <em>/ MANIFEST</em></span></a>
+  <div class="header-right"><a class="nav-link" href="#arquitectura">Arquitectura</a><a class="nav-link" href="#filosofia">Filosofía</a><a class="nav-link" href="#falsabilidad">Falsabilidad</a><button type="button" class="action" id="reading-button" aria-pressed="false">Modo lectura</button></div>
+</div></header>
+<main id="inicio">
+<section class="hero" aria-labelledby="headline">
+  <div class="hero-content">
+    <div class="eyebrow">VICENSÆ PROTOCOL · DOCUMENTO FUNDACIONAL · v0.1</div>
+    <h1 id="headline">MANI<span>FEST.</span></h1>
+    <p class="hero-lead">La libertad es <strong>una consecuencia en sí misma.</strong><br>La libertad nunca se pierde, pero a veces se olvida.</p>
+    <p class="hero-small">No construimos máquinas que concedan libertad. Investigamos infraestructuras capaces de preservar la memoria verificable de los actos, los derechos y las responsabilidades que permiten defender su ejercicio.</p>
+    <div class="hero-actions"><a class="action action-primary" href="#manifesto">Leer manifiesto <span aria-hidden="true">↗</span></a><a class="action" href="./manifesto.md" download>Texto original · MD <span aria-hidden="true">↓</span></a></div>
+  </div>
+  <div class="orb" role="img" aria-label="Representación abstracta de continuidad, ciclos de evidencia y custodia. No representa un teorema matemático.">
+    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs><radialGradient id="halo"><stop offset="0" stop-color="#aa8b4f" stop-opacity=".19"/><stop offset="1" stop-color="#aa8b4f" stop-opacity="0"/></radialGradient><linearGradient id="ring"><stop stop-color="#d2aa6a" stop-opacity=".06"/><stop offset=".45" stop-color="#d2aa6a" stop-opacity=".9"/><stop offset="1" stop-color="#9ee7d5" stop-opacity=".2"/></linearGradient></defs>
+      <circle cx="250" cy="250" r="245" fill="url(#halo)"/>
+      <g fill="none" stroke="url(#ring)" stroke-width="1"><circle cx="250" cy="250" r="212"/><circle cx="250" cy="250" r="170"/><circle cx="250" cy="250" r="125"/><circle cx="250" cy="250" r="77"/></g>
+      <g class="rotate" fill="none" stroke="#c3a46e" stroke-opacity=".55" stroke-width="1.1"><ellipse cx="250" cy="250" rx="212" ry="84" transform="rotate(-37 250 250)"/><ellipse cx="250" cy="250" rx="212" ry="84" transform="rotate(37 250 250)"/></g>
+      <g class="counter" fill="none" stroke="#72cdb9" stroke-opacity=".58" stroke-width="1"><path d="M250 38L432 355L68 355Z"/><path d="M250 462L68 145L432 145Z"/></g>
+      <circle cx="250" cy="250" r="46" stroke="#d2aa6a" fill="#071319" stroke-width="1.3"/>
+      <text x="250" y="263" text-anchor="middle" font-family="Georgia,serif" font-size="48" fill="#dec394">∞</text>
+      <g fill="#a9f1dd"><circle cx="250" cy="38" r="4"/><circle cx="432" cy="355" r="4"/><circle cx="68" cy="355" r="4"/></g>
+    </svg><div class="orb-label">LINAJE · EVIDENCIA · CONTINUIDAD</div>
+  </div>
+</section>
+<section class="truth-strip" aria-label="Cuatro compromisos del manifiesto">
+  <div><small>01 · ONTOLOGÍA</small><strong>La libertad no es un dato.</strong></div>
+  <div><small>02 · RESPONSABILIDAD</small><strong>La inferencia no es autoridad.</strong></div>
+  <div><small>03 · MEMORIA</small><strong>Revisar no es borrar.</strong></div>
+  <div><small>04 · MÉTODO</small><strong>Toda reclamación debe admitir refutación.</strong></div>
+</section>
+<div class="banner"><p>La historia debe poder <em>recordarse.</em><br>El poder debe poder <em>cambiar.</em><br>Las pruebas deben poder <em>verificarse.</em></p><small>PRINCIPIO DE CONTINUIDAD FIDUCIARIA</small></div>
+<section id="arquitectura" class="architecture" aria-labelledby="architecture-title"><div class="section-head"><span class="n">ESTRUCTURA  /  01</span><h2 id="architecture-title">La cadena de una consecuencia</h2></div>
+  <p class="architecture-intro">Cada etapa responde a una pregunta distinta. Ninguna puede reemplazar silenciosamente a las demás.</p>
+  <div class="flow">
+    <div class="flow-node"><b>01</b><strong>Propuesta</strong><small>¿Qué se pretende hacer?</small></div>
+    <div class="flow-node"><b>02</b><strong>Admisión</strong><small>¿Con qué autoridad y condiciones?</small></div>
+    <div class="flow-node"><b>03</b><strong>Ejecución</strong><small>¿Qué efecto fue realmente producido?</small></div>
+    <div class="flow-node"><b>04</b><strong>Evidencia</strong><small>¿Qué puede reconstruirse?</small></div>
+    <div class="flow-node"><b>05</b><strong>Custodia</strong><small>¿Quién sostiene las pruebas?</small></div>
+    <div class="flow-node"><b>06</b><strong>Revisión</strong><small>¿Cómo se corrige sin borrar?</small></div>
+  </div><p class="flow-note">Esquema editorial simplificado. Las evidencias y controles pueden generarse en varias etapas; el flujo no sustituye una especificación técnica ni demuestra por sí solo legitimidad.</p>
+</section>
+<section class="content-grid" id="manifesto" aria-label="Texto íntegro del manifiesto">
+  <aside><div class="sticky"><span class="side-title">ÍNDICE / 00—10</span><a href="#origen" data-section="origen"><span class="nav-index">00</span> Declaración de origen</a><a href="#verdad" data-section="verdad"><span class="nav-index">01</span> El hecho, la prueba y la verdad</a><a href="#autoridad" data-section="autoridad"><span class="nav-index">02</span> Ninguna inferencia se convierte por sí sola en autoridad</a><a href="#historia" data-section="historia"><span class="nav-index">03</span> Actos duraderos, no historias reescritas</a><a href="#custodia" data-section="custodia"><span class="nav-index">04</span> Testigos, custodios y verificadores</a><a href="#reservas" data-section="reservas"><span class="nav-index">05</span> Los recursos y las reservas son obligaciones de continuidad</a><a href="#derechos" data-section="derechos"><span class="nav-index">06</span> Privacidad, reparación y derecho a disentir</a><a href="#filosofia" data-section="filosofia"><span class="nav-index">07</span> Filosofía que dialoga; ingeniería que se deja refutar</a><a href="#continuidad" data-section="continuidad"><span class="nav-index">08</span> La consecuencia no termina en nosotros</a><a href="#falsabilidad" data-section="falsabilidad"><span class="nav-index">09</span> Compromiso público de falsabilidad</a><a href="#pacto" data-section="pacto"><span class="nav-index">10</span> Pacto de continuidad</a></div></aside>
+  <article class="manuscript" aria-label="Manifiesto completo"><p><strong>Manifiesto fundacional · Versión editorial 0.1 · 5 de noviembre de 2026</strong><br />
+<strong>Computación Fiduciaria · Evidencia · Custodia · Continuidad · Libertad</strong></p>
+<blockquote>
+<p>La libertad es una consecuencia en sí misma.<br />
+La libertad nunca se pierde, pero a veces se olvida.</p>
+</blockquote>
+<h2 id="origen" tabindex="-1">00 · Declaración de origen</h2>
+<p>No nacemos para pedir permiso a una máquina para ser libres. La libertad no vive en un dato mutable, no depende de la integridad de una base de datos y no puede ser otorgada por un algoritmo.</p>
+<p>Sin embargo, las condiciones sociales que permiten <strong>recordarla, reconocerla, ejercerla, defenderla y transmitir sus conquistas</strong> sí pueden ser dañadas. Los documentos desaparecen. Las instituciones cambian. Las claves se comprometen. Los custodios fallan. Los recursos se agotan. Y una persona puede conservar un derecho legítimo mientras pierde la capacidad práctica de demostrar sus antecedentes.</p>
+<p><strong>VICENSÆ propone la Computación Fiduciaria para cuidar esa frontera.</strong> No para fabricar la libertad, sino para responsabilizarse de las condiciones materiales, probatorias e institucionales que hacen practicable su ejercicio.</p>
+<h2 id="verdad" tabindex="-1">01 · El hecho, la prueba y la verdad</h2>
+<p>Un hecho no se vuelve verdadero porque se registre. Un documento firmado no convierte cualquier declaración en verdad. Un hash demuestra coincidencia respecto de un compromiso conocido; por sí solo no demuestra justicia, competencia ni legalidad.</p>
+<p>Separamos <strong>hecho histórico, evidencia disponible, procedencia, admisión jurídica y reconocimiento actual</strong>. Una acreditación puede haber existido válidamente aunque hoy se encuentre revocada; una revocación legítima no autoriza a borrar su historia.</p>
+<p>La verificación es necesaria para ciertas consecuencias. Nunca es un sustituto automático de la verdad externa ni del juicio humano legítimo.</p>
+<h2 id="autoridad" tabindex="-1">02 · Ninguna inferencia se convierte por sí sola en autoridad</h2>
+<p>La inteligencia propone. La admisión comprueba condiciones constitutivas. La ejecución produce efectos. No son la misma operación.</p>
+<p><strong>Cognición ≠ Admisión ≠ Ejecución.</strong> Ninguna predicción estadística, confianza algorítmica o elocuencia de un agente concede por sí sola potestad para disponer de derechos, recursos o patrimonios ajenos.</p>
+<p>El motor JANO evalúa reglas y evidencias bajo políticas declaradas. La institución competente conserva su responsabilidad. Cuando falta una condición esencial, la consecuencia debe poder quedar en <strong>WITHHOLD</strong>, sin inventar un permiso silencioso.</p>
+<h2 id="historia" tabindex="-1">03 · Actos duraderos, no historias reescritas</h2>
+<p>Un <strong>Durable Fiduciary Deed (DFD)</strong> aspira a vincular una determinación con estructura, evidencia, autoridad declarada y linaje verificables bajo un perfil explícito.</p>
+<p>La historia no puede mutarse silenciosamente para adaptarse al presente. Pero la historia sí puede <strong>reinterpretarse legítimamente</strong> cuando aparecen nuevas normas, pruebas o conocimientos: mediante extensiones identificables, versiones y decisiones auditables.</p>
+<p><strong>Scale by extension &amp; reinterpretation.</strong> Preservar los bytes originales no equivale a congelar sus consecuencias jurídicas para siempre.</p>
+<h2 id="custodia" tabindex="-1">04 · Testigos, custodios y verificadores</h2>
+<p>Cada emisión fiduciaria legítima en el modelo propuesto requiere, como mínimo, <strong>un testigo y un custodio</strong> con responsabilidades distintas.</p>
+<p>El <strong>testigo</strong> recibe una traza o recibo verificable de la existencia del compromiso; no sustituye la verificación normativa. El <strong>custodio</strong> sostiene la disponibilidad de las evidencias. El <strong>verificador</strong> reconstruye las comprobaciones que permite el perfil. La <strong>autoridad competente</strong> determina los efectos jurídicos aplicables.</p>
+<p>La pluralidad, la independencia, la portabilidad y las pruebas de recuperación importan más que una apariencia de descentralización. Un nodo vacío no debe adquirir poder ni remuneración por el mero hecho de existir.</p>
+<h2 id="reservas" tabindex="-1">05 · Los recursos y las reservas son obligaciones de continuidad</h2>
+<p>Conservar una prueba no es prometer eternidad. La continuidad exige energía, almacenamiento, migraciones, custodia, gobernanza, presupuesto, recuperación ante desastres y capacidad de auditoría futura.</p>
+<p>La propuesta económica VICENSÆ contempla servicios con un <strong>horizonte de cuarenta años prorrogables</strong> y mecanismos de reserva. Ese horizonte es una <strong>hipótesis de diseño y compromiso a demostrar</strong>, no una garantía probada de infalibilidad.</p>
+<p>La regla experimental de distribución <strong>6:4</strong> debe interpretarse bajo límites de capacidad de emisión y trabajo útil por ciclos, no como creación ilimitada de créditos. El dinero es el medio; la riqueza, la consecuencia.</p>
+<h2 id="derechos" tabindex="-1">06 · Privacidad, reparación y derecho a disentir</h2>
+<p>Una sociedad completamente trazada puede no ser libre. Por ello, la evidencia duradera no autoriza la vigilancia total, la exposición de datos sensibles ni la supresión del desacuerdo.</p>
+<p>La infraestructura fiduciaria debe contemplar minimización de datos, acceso proporcional, facultades de impugnación, corrección, confidencialidad y las obligaciones legales de supresión cuando procedan. <strong>La custodia no confiere soberanía sobre las personas.</strong></p>
+<p>Una libertad ejercitable requiere instituciones legítimas, justicia, recursos y ausencia de dominación. Ningún código puede sustituir esas condiciones por sí solo.</p>
+<h2 id="filosofia" tabindex="-1">07 · Filosofía que dialoga; ingeniería que se deja refutar</h2>
+<p>Hegel ayuda a pensar la libertad concreta que se realiza en instituciones; Sen, las capacidades efectivas; Pettit, la no dominación; Arendt, la acción y el mundo común; Ferraris, la documentalidad; Ostrom, la gobernanza de recursos compartidos.</p>
+<p>VICENSÆ no declara haber demostrado el cumplimiento material de esas filosofías. Formula una <strong>hipótesis investigable</strong>: ciertas arquitecturas de admisión, evidencia, custodia y reservas pueden reducir la pérdida de capacidad para acreditar y defender derechos ante fallos institucionales.</p>
+<p>La hipótesis debe confrontarse con registros convencionales y criptográficos comparables, presupuestos equivalentes, fallos preregistrados y oráculos independientes. Si no mejora la recuperación o deteriora privacidad, justicia o coste, se revisará la reclamación.</p>
+<p>Las analogías geométricas, las series de primos, Rezón (Rz) y Resón de Intención (Rs) son un <strong>programa conceptual abierto</strong>: ninguna correspondencia simbólica es, por sí misma, un teorema topológico ni una ley social demostrada.</p>
+<h2 id="continuidad" tabindex="-1">08 · La consecuencia no termina en nosotros</h2>
+<p><strong>NotTR</strong> nombra aquí una aspiración de continuidad no terminal de la responsabilidad probatoria: conservar la capacidad de examinar hechos y revisar decisiones incluso después de que cambien emisores, gobiernos, custodios y tecnologías.</p>
+<p>La revisión democrática nunca debe quedar bloqueada por un registro. <strong>La memoria debe resistir; el poder debe poder cambiar.</strong></p>
+<p>Llamamos <strong>Economía Solar</strong> a orientar recursos hacia capacidades que generen vida y valor más allá de la captura monetaria. La provisión fiduciaria debe explicar quién financia, quién sirve, quién comprueba, quién responde y quién puede abandonar el sistema sin perder arbitrariamente sus derechos.</p>
+<h2 id="falsabilidad" tabindex="-1">09 · Compromiso público de falsabilidad</h2>
+<p>No proclamaremos éxito donde solo exista una promesa, una simulación o una prueba de integridad. Publicaremos <strong>hipótesis, versiones, baselines, criterios de refutación, costes, límites y resultados</strong>, incluyendo los negativos, cuando existan y puedan divulgarse legítimamente.</p>
+<p>Cada reclamación de novedad distinguirá el antecedente filosófico, el mecanismo propuesto, el resultado matemático y la evidencia empírica reproducible. No hay autoridad científica por marca, intención o retórica.</p>
+<p><strong>No new experiment without a new empirical version. No silent historical mutation.</strong></p>
+<h2 id="pacto" tabindex="-1">10 · Pacto de continuidad</h2>
+<p>No prometemos que la libertad nazca de la infraestructura. Prometemos investigar, diseñar y someter a crítica infraestructuras que no hagan desaparecer sin rastro las pruebas necesarias para ejercerla.</p>
+<p>No aspiramos a un mundo donde nadie pueda rectificar. Aspiramos a uno en el que rectificar no signifique borrar y conservar no signifique dominar.</p>
+<p><strong>La libertad es una consecuencia en sí misma. La memoria verificable puede ayudar a que no olvidemos cómo defender su ejercicio.</strong></p>
+<hr />
+<p><strong>Estado del documento:</strong> manifiesto filosófico y de diseño, no normativa vigente, contrato de servicio, prueba experimental ni garantía de prestaciones.<br />
+<strong>Autoría y dirección conceptual:</strong> Raúl Ballester Nortes · VICENSÆ.<br />
+<strong>Versión:</strong> 0.1 · 2026-11-05 · Versión ALPHA en GitHub Pages · destino editorial previsto: <code>https://vicensae.com/MANIFEST</code>.<br />
+<strong>Integridad:</strong> consultar <code>SHA256SUMS.txt</code> del paquete. No existe sello criptográfico de autoridad ni DFD emitido por la mera publicación de este archivo.</p>
+<p><strong>QR-F:</strong> PENDIENTE · No constituye certificación fiduciaria.</p>
+</article>
+</section>
+<section class="status" aria-labelledby="status-title"><div class="eyebrow">ESTADO DE LA RECLAMACIÓN</div><h2 id="status-title">Una tesis abierta a su propia refutación.</h2><p>Este documento expresa principios y compromisos de investigación. No equivale a una acreditación empírica general, una garantía jurídica universal, una certificación criptográfica ni un despliegue institucional ya realizado.</p><div class="chips"><span class="chip">Filosofía · Propuesta</span><span class="chip">Arquitectura · En investigación</span><span class="chip">DFD · Verificación por perfil</span><span class="chip">Impacto social · Por demostrar</span><span class="chip">40 años · Horizonte propuesto</span></div></section>
+</main>
+<footer class="footer"><div class="footer-inner"><div><strong>VICENSÆ ∞</strong><p>Computación Fiduciaria · Evidencia · Custodia · Continuidad</p><p>Concepto y dirección: Raúl Ballester Nortes. Manifiesto editorial v0.1 · 05/11/2026.</p></div><div class="footer-links"><a href="./manifesto.md" download>Manifiesto en Markdown</a><button class="action" id="copy-link" type="button">Copiar enlace</button><a href="#inicio">Volver al inicio ↑</a></div></div><div class="copyright">NO SE HA EMITIDO UN DFD NI UN SELLO QR-F PARA ESTA PUBLICACIÓN · INTEGRIDAD EDITORIAL CONSULTABLE EN EL PAQUETE DE ENTREGA.</div></footer>
+<div class="toast" role="status" aria-live="polite" id="toast"></div>
+<script>
+(() => {
+  'use strict';
+  const progress = document.getElementById('reading-progress');
+  const navLinks = [...document.querySelectorAll('aside a[data-section]')];
+  const btn = document.getElementById('reading-button');
+  const toast = document.getElementById('toast');
+  const update = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    progress.style.width = (max>0 ? Math.min(100,Math.max(0,scrollY/max*100)) : 100) + '%';
+    let current = '';
+    for (const a of navLinks) {
+      const node = document.getElementById(a.dataset.section);
+      if(node && node.getBoundingClientRect().top < innerHeight*.42) current = a.dataset.section;
+    }
+    navLinks.forEach(a => {const active = a.dataset.section===current; a.classList.toggle('current',active); if(active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});
+  };
+  addEventListener('scroll', update, {passive:true});
+  addEventListener('resize', update); update();
+  btn.addEventListener('click',()=>{const on=document.body.classList.toggle('reading-mode');btn.setAttribute('aria-pressed',String(on));btn.textContent=on?'Modo oscuro':'Modo lectura';});
+  document.getElementById('copy-link').addEventListener('click', async ()=>{
+    try {await navigator.clipboard.writeText(location.href);toast.textContent='Enlace de esta publicación copiado';} catch {toast.textContent='Copia la dirección de esta página';}
+    toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2500);
+  });
+})();
+</script>
+</body>
+</html>
